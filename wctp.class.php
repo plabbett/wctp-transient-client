@@ -18,7 +18,7 @@
 		*
 		*@param url	URL for the WCTP carrier gateway endpoint (required)
 		*/
-		public function __constructer($url = false){
+		public function __construct($url = false){
 			if(!$url){
 				die('Missing required parameter $url');
 			}
@@ -43,18 +43,17 @@
 		public function VersionQuery($inquirer = false, $dateTime = false){
 			if(!$inquirer){	die('Missing required parameter $inquirer.'); }
 			
-			$xml = 
-				"<!DOCTYPE wctp-Operation SYSTEM \"http://dtd.wctp.org/wctp-dtd-v1r1.dtd\">
-				<?xml version=\"1.0\" encoding=\"utf-8\" ?>
-				<wctp-Operation>
-				<wctp-VersionQuery inquirer=\"$inquirer\"";
-				if(!$datetime){
-					$xml .= " />";
-				}
-				else{
-					$xml .= " dateTime=\"" . $this->format_datetime($dateTime) . "\" />";
-				}
-				$xml .= "</wctp-Operation>";
+			$xml = "<!DOCTYPE wctp-Operation SYSTEM \"http://dtd.wctp.org/wctp-dtd-v1r1.dtd\">";
+			$xml .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
+			$xml .= "<wctp-Operation>";
+			$xml .= "<wctp-VersionQuery inquirer=\"$inquirer\"";
+			if(!$datetime){
+				$xml .= " />";
+			}
+			else{
+				$xml .= " dateTime=\"" . $this->format_datetime($dateTime) . "\" />";
+			}
+			$xml .= "</wctp-Operation>";
 
 				$response = $this->http_post_xml($xml);
 				$xml_object = simplexml_load_string($response);
@@ -76,6 +75,7 @@
 		        	curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		        	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		    	$response = curl_exec($ch);
+			if(!$response){	die('Error: ' . curl_error($ch)); }
 		    	curl_close($ch);
 		    	return $response;
 		}
@@ -96,7 +96,6 @@
 		*@param xml xml response from carrier gateway
 		*/
        		 private function parse_xml($xml){
-		    
 			foreach($xml->attributes() as $key => $value){
 		    		$this->carrier['response'][$key] = $value;
 			}
