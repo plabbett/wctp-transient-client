@@ -50,9 +50,9 @@
 			if(!$recipientID){	die('Missing required parameter $recipientID.'); }
 			if(!$message){	die('Missing required parameter $message.'); }
   
-			$xml = '<!DOCTYPE wctp-Operation SYSTEM "http://dtd.wctp.org/wctp-dtd-v1r1.dtd">';
-			$xml .= '<?xml version="1.0" encoding="utf-8" ?>';
-			$xml .= '<wctp-Operation>';
+			$xml = '<?xml version="1.0" encoding="utf-8" ?>';
+			$xml .= '<!DOCTYPE wctp-Operation SYSTEM "http://www.telemessage.com/dtd/wctp/wctp-dtd-v1r3.dtd">';
+			$xml .= '<wctp-Operation wctpVersion="WCTP-DTD-V1R3">';
 			$xml .= '<wctp-SubmitClientMessage>';
 			$xml .= '<wctp-SubmitClientHeader>';
 			$xml .= '<wctp-ClientOriginator senderID="' . $senderID;
@@ -105,9 +105,9 @@
 			if(!$recipientID){	die('Missing required parameter $recipientID.'); }
 			if(!$trackingNumber){	die('Missing required parameter $trackingNumber.'); }
 			
-			$xml = '<!DOCTYPE wctp-Operation SYSTEM "http://dtd.wctp.org/wctp-dtd-v1r1.dtd">';
-			$xml .= '<?xml version="1.0" encoding="utf-8" ?>';
-			$xml .= '<wctp-Operation>';
+			$xml = '<?xml version="1.0" encoding="utf-8" ?>';
+			$xml .= '<!DOCTYPE wctp-Operation SYSTEM "http://www.telemessage.com/dtd/wctp/wctp-dtd-v1r3.dtd">';
+			$xml .= '<wctp-Operation wctpVersion="WCTP-DTD-V1R3">';
 			$xml .= '<wctp-ClientQuery senderID="' . $senderID . 
 				'" recipientID="' . $recipientID . 
 				'" trackingNumber="' . $trackingNumber . '" />';
@@ -128,11 +128,11 @@
 		public function VersionQuery($inquirer = false, $dateTime = false){
 			if(!$inquirer){	die('Missing required parameter $inquirer.'); }
 			
-			$xml = "<!DOCTYPE wctp-Operation SYSTEM \"http://dtd.wctp.org/wctp-dtd-v1r1.dtd\">";
-			$xml .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
-			$xml .= "<wctp-Operation>";
+			$xml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
+			$xml .= "<!DOCTYPE wctp-Operation SYSTEM \"http://www.telemessage.com/dtd/wctp/wctp-dtd-v1r3.dtd\">";
+			$xml .= "<wctp-Operation wctpVersion='WCTP-DTD-V1R3'>";
 			$xml .= "<wctp-VersionQuery inquirer=\"$inquirer\"";
-			if(!$datetime){
+			if(!$dateTime){
 				$xml .= " />";
 			}
 			else{
