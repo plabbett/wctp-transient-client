@@ -57,6 +57,7 @@
 			$xml .= '<wctp-SubmitClientHeader>';
 			$xml .= '<wctp-ClientOriginator senderID="' . $senderID;
 			if(!$miscInfo){
+				$xml .= '"/>';
 			}
 			else{
 				$xml .= '" miscInfo="' . $miscInfo . '" />';
